@@ -2,7 +2,17 @@
 # -*- coding: utf-8 -*-
 
 mapa = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
-clear = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
+matriz = [
+	[" ", " ", " "],
+	[" ", " ", " "],
+	[" ", " ", " "]
+]
+
+def cleanMap():
+	del mapa[:]
+
+	for i in range(3):
+		mapa.append([fila[i] for fila in matriz])
 
 def si(preg):
     from string import lower
@@ -57,7 +67,7 @@ def main():
 		pos = str(raw_input("jugador "+str(np)+" (ejemplo 2,3): "))
 		tirar(np,pos)
 		if check(np):
-			mapa = clear
+			cleanMap()
 			break
 		printcrux()
 
