@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-map = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
+mapa = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
+clear = [[" ", " ", " "], [" ", " ", " "], [" ", " ", " "]]
 
 def si(preg):
     from string import lower
@@ -14,28 +15,50 @@ def tirar(player,pos):
 	m = int(ind[1]) - 1
 
 	if player == 1:
-		map[m][n] = "x"
+		mapa[n][m] = "x"
 	else:
-		map[m][n] = "o"
+		mapa[n][m] = "o"
 
-def check():
-	print "hola"
+def check(np):
+	if np == 1:
+		ficha = "x"
+	else:
+		ficha = "o"
+
+	fin = False
+
+	if mapa[0][0] == ficha and mapa[1][1] == ficha and mapa[2][2] == ficha:
+		fin = True
+	elif mapa[2][0] == ficha and mapa[1][1] == ficha and mapa[0][2] == ficha:
+		fin = True
+	else:
+		for z in range(3):
+			if mapa[0][z] == ficha and mapa[1][z] == ficha and mapa[2][z] == ficha:
+				fin = True
+
+		for w in range(3):
+			if mapa[w][0] == ficha and mapa[w][1] == ficha and mapa[w][2] == ficha:
+				fin = True
+
+	print "ganaste jugador " + str(np)
+	return fin
 
 def printcrux():
-	print map[0][0]+" | "+map[0][1]+" | "+map[0][2]+" "
+	print mapa[0][0]+" | "+mapa[0][1]+" | "+mapa[0][2]+" "
 	print "----------"
-	print map[1][0]+" | "+map[1][1]+" | "+map[1][2]+" "
+	print mapa[1][0]+" | "+mapa[1][1]+" | "+mapa[1][2]+" "
 	print "----------"
-	print map[2][0]+" | "+map[2][1]+" | "+map[2][2]+" "
+	print mapa[2][0]+" | "+mapa[2][1]+" | "+mapa[2][2]+" "
 
 def main():
 	i=0
 	while True:
-		pass
-		np = i % 2 + 1
+		np = (i % 2) + 1
 		pos = str(raw_input("jugador "+str(np)+" (ejemplo 2,3): "))
 		tirar(np,pos)
-		check()
+		if check(np):
+			mapa = clear
+			break
 		printcrux()
 
 		i= i + 1
